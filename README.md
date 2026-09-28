@@ -1,3 +1,6 @@
+
+<img src="public/Djed.svg" width="400" alt="Banner" />
+
 # Djed Next
 
 This repository contains the web application for Djed, a productivity app built with Next.js and TypeScript.
