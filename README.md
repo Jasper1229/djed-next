@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+<img src="public/Djed.svg" width="400" alt="Banner" />
 
-First, run the development server:
+# Djed Next
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+This repository contains the web application for Djed, a productivity app built with Next.js and TypeScript.
+
+---
+
+## What is Djed?
+
+Djed is a productivity application designed for people like me, who have difficulty committing time to learning things that don't have a clear path of progression.
+
+Djed organizes learning into **skills**, **skill trees**, **milestones**, and **time-tracking sessions**, allowing users to see their progress as they work toward larger goals.
+
+---
+
+## Components of Djed
+
+### Skill
+
+A skill is the fundamental component of Djed. It has a name, a description, and an accumulated time.
+
+Skills can be organized hierarchically, allowing one skill to be a parent of another. A skill's total time includes the time spent directly on that skill as well as the time spent on all of its child skills.
+
+### Skill Tree
+
+A skill tree is the primary way of organizing skills. Each skill tree begins with a root skill, which represents the overall subject and tracks the combined time spent throughout the entire tree.
+
+```mermaid
+flowchart TB
+    A["Programming<br>(1200 hours)"] --> n1("Java<br>(1000 hours)")
+    A --> n2("Python<br>(200 hours)")
+    n1 --> n3("Spring Boot<br>(300 hours)")
+    n1 --> n4("Minecraft Plugins<br>(700 hours)")
 ```
+*In this example, "Programming" is the root skill, and tracks the overall time spent in each child skill.*
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Milestones
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+A milestone is a time-based goal assigned to a skill.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+For example, a Java skill could have a milestone of 500 hours. As time is logged against the skill, progress toward the milestone can be tracked.
 
-## Learn More
+### Time Tracking
 
-To learn more about Next.js, take a look at the following resources:
+Time in Djed is tracked using sessions.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+A session consists of a start time, an end time, and the skill being worked on. The time recorded by a session contributes to the total time of that skill and is also propagated to its parent skills.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+For example, a 2-hour Spring Boot session contributes:
 
-## Deploy on Vercel
+- **2 hours** to Spring Boot
+- **2 hours** to Java
+- **2 hours** to Programming
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This allows parent skills to automatically represent the total amount of time invested in their entire subtree.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## About This Rewrite
+
+This is a rewrite of the original Spring Boot and PostgreSQL backend as a full-stack Next.js application. The core concepts above are unchanged; only the implementation is different.
